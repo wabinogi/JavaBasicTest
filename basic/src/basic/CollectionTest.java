@@ -17,7 +17,7 @@ public class CollectionTest {
 		
 		System.out.println(it.hasNext());
 		System.out.println(it.next());
-		
+		//dd
 	}
 
 }
