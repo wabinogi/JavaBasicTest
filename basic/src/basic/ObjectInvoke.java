@@ -4,6 +4,7 @@ import java.io.*;
 
 public class ObjectInvoke {
 	
+
 	private int k;
 	
 	private static ObjectInvoke oi1;
@@ -14,7 +15,7 @@ public class ObjectInvoke {
 		this.k = k;
 	}
 	
-	
+
 	public static void main(String[] args)
 	{		
 		//普通对象可以使用数组初始化
@@ -34,6 +35,7 @@ public class ObjectInvoke {
 		triple(ii);
 		System.out.println(ii);
 		
+
 		ObjectInvoke oii = new ObjectInvoke(10);
 		//方法得到的是“对象引用”（指针地址）的拷贝。
 		//当调用triple时，oii传的是一个（指针地址）的拷贝，该拷贝和oii地址同时指向一个对象。
@@ -47,6 +49,7 @@ public class ObjectInvoke {
 		swap(oi1,oi2);
 		System.out.println("oi1:" + oi1.k);
 		System.out.println("oi2:" + oi2.k);
+
 	}
 	
 	public static void triple(int x)
@@ -59,6 +62,7 @@ public class ObjectInvoke {
 		oi.k = oi.k * 10 ;
 	}
 	
+
 	public static void swap (ObjectInvoke ooi1,ObjectInvoke ooi2)
 	{
 		ObjectInvoke ooi3 = ooi1;
