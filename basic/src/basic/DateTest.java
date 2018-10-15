@@ -6,19 +6,20 @@ public class DateTest {
 
 	public static void main(String[] args)
 	{
-		//LocalDate.now³õÊ¼»¯
+		//LocalDate.nowï¿½ï¿½Ê¼ï¿½ï¿½
 		LocalDate ld = LocalDate.now();
 		System.out.println(ld);
 		
-		//LocalDate.of³õÊ¼»¯
+		//LocalDate.ofï¿½ï¿½Ê¼ï¿½ï¿½
 		LocalDate ld1 = LocalDate.of(1999, 12, 24);
 		System.out.println(ld1);
 		
-		//·½·¨²âÊÔ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		System.out.println(ld1.getDayOfMonth());
 		System.out.println(ld1.getDayOfWeek());
 		System.out.println(ld1.plusDays(100).getMonthValue());
 		System.out.println(ld1);
+		
 		
 	}
 }

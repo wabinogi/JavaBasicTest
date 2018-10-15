@@ -11,7 +11,7 @@ public class BreakLabelTest {
 		{
 			System.out.println("Start");
 			break WabinogiLable1;	
-			//后面的语句无法到达！
+			
 		}
 		System.out.println("End");
 		
