@@ -2,7 +2,7 @@ import java.io.*;
 
 
 public class StringBuilderTest {
-
+ 
 	public static void main(String[] args)
 	{
 		SbTest1();
