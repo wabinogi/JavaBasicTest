@@ -1,5 +1,5 @@
 package basic;
-
+  
 public class ObjectTest {
 	
 	private int a;

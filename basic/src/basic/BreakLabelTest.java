@@ -1,7 +1,7 @@
 package basic;
 import java.io.*;
 
-
+  
 public class BreakLabelTest {
 
 	public static void main(String[] args)

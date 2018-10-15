@@ -1,6 +1,6 @@
 package basic;
 import java.io.*;
-
+  
 public class FinalTest {
 	
 	//静态常量比较多用

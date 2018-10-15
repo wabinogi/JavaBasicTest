@@ -1,7 +1,7 @@
 package basic;
 
 import java.util.*;
-
+  
 
 public class IteratorTest<E> implements Iterator<E>{
 	

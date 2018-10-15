@@ -14,7 +14,7 @@ public class ObjectInvoke {
 	{
 		this.k = k;
 	}
-	
+	  
 
 	public static void main(String[] args)
 	{		
