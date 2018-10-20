@@ -6,7 +6,7 @@ public class NormalTest {
 
 	public static void main(String[] args)
 	{ 
-		//初始化方法1
+		//初始化方法12
 		int[] ii = {1,2,3,4,5};
 		//初始化方法2，默认赋值为0
 		int[] kk = new int[5];
