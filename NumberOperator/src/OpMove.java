@@ -7,6 +7,7 @@ public class OpMove {
 		
 		System.out.print("as"); 
 		//124
+		//from new
 	}
 
 }
