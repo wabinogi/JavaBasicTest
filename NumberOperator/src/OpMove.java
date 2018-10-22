@@ -6,7 +6,11 @@ public class OpMove {
 	{
 		
 		System.out.print("as"); 
-		//222
+		//1
+		//2
+		//3
+		//4
+		//5
 
 
 	}
