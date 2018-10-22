@@ -10,13 +10,7 @@ public class OpMove {
 		//3.在项目里选择MERGE
 		//4.在.JAVA文件中选择MERGE TOOLS
 		System.out.print("as"); 
-	//88888888888888
 
-		//222
-		//333
-		//444
-
-   //111
 	}
 
 }
