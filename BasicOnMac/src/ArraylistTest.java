@@ -1,8 +1,8 @@
 import java.util.ArrayList;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class ArraylistTest {
-	
 	
 	public static void main(String[] args)
 	{ 
@@ -10,9 +10,27 @@ public class ArraylistTest {
 		arrayListT1();
 		arrayListT2();
 		arrayListT3();
+		arrayListT4();
 	}
 	
-
+	public static void arrayListT4()
+	{
+		System.out.println("__________________T4");
+		//产生5个数组
+		Wabinogi[] wi = new Wabinogi[5];
+		//由于是引用类型，所以为空
+		//System.out.println(wi[0].money);
+		
+		//cl.getComponentType()用来确定数组的类型
+		System.out.println(wi.getClass().getComponentType());
+		//类型带入Array.newInstance进行初始化,如果getComponentType返回的是引用类型，则初始化数组只有引用，值为null
+		Object ob = Array.newInstance(wi.getClass().getComponentType(), 5);
+		//使用基本类型int.class，数组中返回的值为0！记住integer为int的包装类
+		Object ib = Array.newInstance(int.class, 5);
+		System.out.println(((int[])ib)[1]);
+	
+	}
+	
 	public static void arrayListT3()
 	{
 		System.out.println("__________________T3");
