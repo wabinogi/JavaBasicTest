@@ -7,7 +7,7 @@ public class Wabinogi implements WabinogiIN
 	public String sex = "male";
 	private  int age = 30;
     
-	public void Getbrith()
+	public void Getbrith() throws Exception
 	{
 		System.out.println("1986");
 	}
