@@ -13,6 +13,9 @@ public class ComparatorTest implements Comparator<String>{
 		Arrays.sort(ss,cs);
 		System.out.println(Arrays.toString(ss));
 		
+		
+	
+		
 		//实现浅拷贝，ObjectTest类中实现类clonable接口，和clone方法！
 		ObjectTest ot = new ObjectTest(1);
 		ObjectTest ot1 = ot.clone();
@@ -29,5 +32,10 @@ public class ComparatorTest implements Comparator<String>{
 	public int compare(String o1, String o2) {
 		// TODO Auto-generated method stub
 		return o1.length() - o2.length();
+	}
+	
+	public static void compare1() {
+		
+		
 	}
 }
