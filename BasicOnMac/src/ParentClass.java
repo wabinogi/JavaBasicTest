@@ -28,8 +28,15 @@ public class ParentClass {
 	//同上
 	public static void main(String...args) throws Exception 
 	{
+		//try finally和try catch的较好写法！
 		try{
-		new ParentClass().GetExp(1);
+			try{
+		       new ParentClass().GetExp(1);
+			}
+			finally
+			{
+				//todo sth
+			}
 		}
 		catch(Exception e)
 		{
