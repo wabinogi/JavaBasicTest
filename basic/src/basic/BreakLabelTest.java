@@ -1,5 +1,5 @@
 package basic;
-import java.io.*;
+
 
   
 public class BreakLabelTest {
