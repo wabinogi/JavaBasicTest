@@ -5,15 +5,19 @@ import java.io.Closeable;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.function.IntFunction;
+import java.util.function.Supplier;
 
 //类GenericTest 泛型符号T,可以限定
 //如果多个限定，顺序痕重要！因为列表最后的接口方法，可能不会再IDE中出现
-public class GenericTest<T extends Comparable> {
+public class GenericTest<T> {
 
 	
 	private T t = null;
 	
-	public static void main(String[] args)
+	
+	
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException
 	{
 		GenericTest<String> GnS = new GenericTest<>();
 		GenericTest<String> GnS1 = new GenericTest<>("1");
@@ -36,7 +40,54 @@ public class GenericTest<T extends Comparable> {
 	    //调用接口方法
 	    GenericTest.<String>GetGnsObject5("a");
 	    
+	    //lambda表达式，实现接口对象st
+	    Supplier<String> st = () -> {return "abcd";};
+	    out.println(GenericTest.GetNewInstance(st).getObject());
+	    
+	    //利用Class<T> ct初始化，Integer.class是Class<T>的实例
+	    Class<String> ct = String.class;
+	    GenericTest<String> gs =  GenericTest.GetNewInstance1(ct);
+	    gs.setObject("123");
+	    out.println(gs.getObject());
+	    
+	    //。。。
+	    GenericTest.GetArray("1","2");
+	    //函数式接口调用
+	    GenericTest.GetArray1((int i)->{ return new String[i];},"1","2");
 	}
+	//采用函数式接口赋参数值
+	public static <T extends Comparable> T[] GetArray1(IntFunction<T[]> it,T...t)
+	{
+		T[]  tt =  it.apply(2);
+		tt[0] = t[0];
+		tt[1] = t[1];
+		return tt;
+	}
+	//返回
+	public static <T extends Comparable> T[] GetArray(T... t)
+	{
+		//如果Comparable为Object，则报错
+		Comparable[] oo = new Comparable[2];
+        oo[0] = t[0];
+        oo[1] = t[1];
+		return (T[])oo;
+	}
+	
+	
+	//利用Class<T>的实例化方法，
+	public static <T> GenericTest<T> GetNewInstance1(Class<T> ct) throws InstantiationException, IllegalAccessException
+	{
+		//ct如果是Integer.class会报错！貌似JAVA八中基本型都不行！
+		return new GenericTest<>(ct.newInstance()); 
+	}
+	
+	//返回GenericTest<T>,Supplier<T>返回某对象
+	public static <T> GenericTest<T> GetNewInstance(Supplier<T> st)
+	{
+		//将某对象输入GenericTest构造函数初始化
+		return new GenericTest<>(st.get()); 
+	}
+	
 	
 	//调用方法泛型输入必须支持接口类型，否则报错
 	//语法关键字用extends进行绑定；可以是类和接口
