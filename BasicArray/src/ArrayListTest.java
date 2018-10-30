@@ -1,7 +1,7 @@
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
-import basic.*;
+
 
 
 //支持快速随机访问
@@ -213,7 +213,7 @@ public class ArrayListTest {
 	
 	public static void ALtest3()
 	{
-		Object[] o = (Object[]) Array.newInstance(ObjectTest.class, 5);
+		Object[] o = (Object[]) Array.newInstance(String.class, 5);
 		//将ss拷贝到oo中
 		System.out.println(Arrays.toString(o));
 	}
