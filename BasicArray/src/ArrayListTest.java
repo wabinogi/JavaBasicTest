@@ -13,7 +13,7 @@ import basic.*;
 //优点——————————————————————————————————————————————————————
 //动态增长
 //可以加入重复的value
-public class ArraylistTest {
+public class ArrayListTest {
 
 	//初始化10个单位
 	static ArrayList<String> al = new ArrayList<String>(10);
@@ -28,6 +28,38 @@ public class ArraylistTest {
 		ALListIterRead();
 		ALClone();
 		ALEqual();
+		AltoArray();
+		Altrim();
+	}
+	static Object ob;
+	
+	public static void Altrim()
+	{
+		ArrayList aa = new ArrayList(2);
+		aa.add("1");
+		aa.add("2");
+		//一次性扩展到位！生成10个elements，如果10个不够了，则扩展变成10*1.5个
+		aa.ensureCapacity(10);
+	
+		//trimToSize去除数组动态增长后多余的那部分！
+		aa.trimToSize();
+		
+	}
+	
+	//数组转换
+	public static void AltoArray()
+	{
+		ArrayList aa = new ArrayList();
+		aa.add("w");
+		aa.add("a");
+		aa.add("b");
+		aa.add("i");
+		//将Arraylist转换为数组类型！
+		String[] ss =  (String[]) aa.<String>toArray(new String[]{});
+		System.out.println(Arrays.toString(ss));
+		//将Arraylist转换为OBJECT数组类型！
+		Object[] sss = aa.toArray();
+		
 	}
 	
 	//ArrayList中数组元素值和位置全一样，equals才相等！
