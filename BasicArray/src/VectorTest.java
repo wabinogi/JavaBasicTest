@@ -8,7 +8,7 @@ import static java.lang.System.out;
 //也就是说删除后，索引会改变！因此不适合做添加、删除操作，适合查询、修改
 //顺序读写（迭代器、FOR循环一般）
 //其中的Enumeration接口引用是遗留产物，可以用iterator全替代
-public class VectorClass {
+public class VectorTest {
 
 	//线程同步
 	//构造函数默认起始容量为10

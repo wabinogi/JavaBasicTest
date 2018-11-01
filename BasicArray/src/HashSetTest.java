@@ -6,7 +6,7 @@ import java.util.TreeSet;
 //基于HashMap实例实现
 //没有顺序，尤其随着时间推移，元素的顺序可能会变
 //元素唯一，可以有一个NULL
-//读写性能很好，ADD、REMOVE、UPDATE O(1)
+//读写性能很好，ADD、REMOVE、UPDATE,几乎是 O(1)
 //线程不同步
 //非线程安全的修改，采用fail-fast机制，触发该机制会抛出 ConcurrentModificationException
 //但是fail-fast机制可能不保证立刻发生，因此依靠ConcurrentModificationException来作为执行条件是不可行的
