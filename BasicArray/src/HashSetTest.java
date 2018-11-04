@@ -3,7 +3,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.TreeSet;
 
-//基于HashMap实例实现
+//基于HashMap实例实现，有单向链结构
 //没有顺序，尤其随着时间推移，元素的顺序可能会变
 //元素唯一，可以有一个NULL
 //读写性能很好，ADD、REMOVE、UPDATE,几乎是 O(1)
