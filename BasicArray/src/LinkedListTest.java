@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -13,14 +14,17 @@ public class LinkedListTest {
 	public static void main(String... args) 
 	{
 		Test();
+
 	}
 	static ListIterator li;
+
 	
 	public static void Test()
 	{
 		LinkedList ll = new LinkedList();
-		ll.add("a");
 		ll.add("b");
+		ll.add("a");
+		
 		ll.add("c");
 		System.out.println(ll);
 		

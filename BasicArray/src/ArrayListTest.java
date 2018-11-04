@@ -5,7 +5,7 @@ import java.util.*;
 
 
 //支持快速随机访问
-//内部有链表结构
+//内部用数组保存[1],[2],[3],[4],[5]......每个数组对应一个地址。和链表结构不太一样。
 //插入元素，其他元素后移；删除元素，其他元素前移
 //添加、修改、删除效率不高
 //随机访问快于FOR循环快于迭代器
@@ -36,6 +36,7 @@ public class ArrayListTest {
 	public static void Altrim()
 	{
 		ArrayList aa = new ArrayList(2);
+		
 		aa.add("1");
 		aa.add("2");
 		//一次性扩展到位！生成10个elements，如果10个不够了，则扩展变成10*1.5个
@@ -174,9 +175,10 @@ public class ArrayListTest {
 	public static void ALadd()
 	{
 		//无索引添加
-		al.add("1");
 		al.add("2");
 		al.add("3");
+		al.add("1");
+	
 
 		System.out.println(al.toString());
 		//实际大小

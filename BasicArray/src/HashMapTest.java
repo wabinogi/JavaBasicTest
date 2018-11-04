@@ -12,11 +12,15 @@ import java.util.Set;
 //水桶不够时，重新哈希的桶大小为其2倍
 //迭代器采用fast-fail机制
 //键采用HashCode(),因此对于传入的复杂对象，可能需要重写HashCode()方法，保持对象一致
-//KEY和VALUE的集合Collection<T>实际是个两个单向链表，每次HASH插入都需要维护链表指针，指针的顺序是地址顺序，不是插入顺序。
+//KEY和VALUE的集合Collection<T>有可能是个两个单向链表，每次HASH插入都需要维护链表指针，指针的顺序是地址顺序，
+//不是插入顺序，但是只是猜测，因为不知道Iterator的底层机制。也有可能没有链表地址接口，Iterator的游标直接按地址顺序访问？
 //过大时BUCKET采用红黑树
+//**WEAKHASHMAP,用于实现空间有限的内存结构，对于不用的弱引用，GC会回收ENTITY
+//**IDENTITYhashmap,可以保存两个值一样，但是引用不一样的KEY。但是引用一样的KEY，只能保存一次！
 public class HashMapTest {
 
 	static HashMap hm;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
