@@ -1,7 +1,7 @@
 package wabinogi.hive.udf;
  
 import java.io.File;
-import java.io.IOException;
+import java.io.IOException;  
 import java.net.InetAddress;
 import org.apache.hadoop.hive.ql.exec.UDF;
 import com.maxmind.db.CHMCache;
