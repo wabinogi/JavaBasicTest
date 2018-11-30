@@ -2,10 +2,10 @@ import java.util.PriorityQueue;
 
 //优先队列，不能放NULL
 //默认容量11,size是实际大小
-//采用二叉树排序，查询，O（log2n）
+//采用二叉堆算法（小根堆）排序，查询，O（log2n），自平衡完全二叉树
 //实现Comparator接口，无参构造实现Comparable
 public class PriorityQueTest {
-
+	
 	static PriorityQueue pq ;
 	
 	public static void main(String[] args) {
