@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="basic/src"/>
+	<classpathentry kind="src" path="BasicArray/src"/>
+	<classpathentry kind="src" path="BasicOnMac/src"/>
+	<classpathentry kind="src" path="NumberOperator/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="BasicArray/bin"/>
+</classpath>
