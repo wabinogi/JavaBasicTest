@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ReentraceLockTest {
 
      Integer i = new Integer(0);
-	static Lock alock = new ReentrantLock();
+	 static Lock alock = new ReentrantLock();
 	
 	
 	public static void  main(String[] args) throws InterruptedException, FileNotFoundException {
@@ -23,23 +23,20 @@ public class ReentraceLockTest {
 		t.setName("SECOND THREAD");
 		t.start();
 		
-		System.out.println(maint.getName());	
+		System.out.println(maint.getName());
+		String b = "";
 		ReentraceLockTest.alock.lock();
 		try
 		{
-		  PrintStream ps2 =  new PrintStream("E:\\log.txt");
 		  for(int j = 0; j <= 9; j ++){
-		   
-			
-			  ps2.append("Main :1");
-  
+			  Thread.sleep(100);
+			  b = b + System.currentTimeMillis() + ",";
 		   }
-		  ps2.flush();
-		  ps2.close();
 		}
 		finally
 		{
 			ReentraceLockTest.alock.unlock();
+			System.out.println("b:"+ b);
 		}
 		
 	}
@@ -47,32 +44,28 @@ public class ReentraceLockTest {
 	
 	public class SecondThread implements Runnable
 	{   
-		PrintStream ps;
 		public void run() 
 		{
-			
 		   Thread tt = Thread.currentThread();
 		   System.out.println(tt.getName());
-		   ReentraceLockTest.alock.lock();
+		   //ReentraceLockTest.alock.lock();
+		   String a = "";
 		   try{
-			   
-			   ps = new PrintStream("E:\\log.txt");
 		   for(int j = 0; j <= 9; j ++){
 			   
-			   ps.append("SECOND");
-			  // System.out.println("SECOND : 2");	   
+			  Thread.sleep(150);
+			  a = a + System.currentTimeMillis() + ",";
 			
 			} 
-		   } catch (FileNotFoundException e) {
+		 
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		   finally
 		   {
-			  
-			   ReentraceLockTest.alock.unlock();
-			   ps.flush();
-			   ps.close();
+			  // ReentraceLockTest.alock.unlock();
+			   System.out.println(a);
 		   }
 		   
 		}	
