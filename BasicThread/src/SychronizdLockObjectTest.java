@@ -1,6 +1,7 @@
 
-//使用synchronized(object)获取对象的锁，实现阻塞
+//使用synchronized(object)获取对象的锁，实现阻塞，又叫客户端锁定
 //注意！貌似基本类型和包装器类型不能获得锁！
+//
 public class SychronizdLockObjectTest implements Runnable {
 
 	//volatile关键字，保证如果主存的值改变，则多个线程从主存 中读到新值，而非线程缓存。

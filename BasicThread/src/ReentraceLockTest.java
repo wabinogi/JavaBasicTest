@@ -13,6 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
 //重入锁具有条件锁特性
 //进入等待的使用后面的形式：while(j == 3) acond.await();
 //充入锁的结构具有一定的特殊性，只有不能不用的时候才用！
+//重入锁可以使用TRYLOCK方法
 public class ReentraceLockTest {
 
      static Lock alock = new ReentrantLock();
