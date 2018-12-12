@@ -2,6 +2,8 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 //继承抽象类RecursiveTask，如果不返回参数，继承RecursiveAction
+//fork join框架采用窃取算法平衡队列任务
+//有待进一步研究
 public class ForkJoinTest extends RecursiveTask<String>{
 
 	//门槛值，任务大于此，则启动多个线程
