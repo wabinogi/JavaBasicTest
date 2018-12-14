@@ -50,9 +50,10 @@ public class lamdaTest {
 	
 	public static void lamda1(String s)
 	{
-		//恶心的lamda表达式4
+		//表示bi接口的实现采用了Math类的pow方法
 		BasicInterface bi = Math::pow;
-
+        System.out.println(bi.BasicInterfaceTest(10, 2));
+         
 		//一旦局部变量s传入lamda表达式，值就不可改变，成了final,但是StringBuilder特别
 		//s在lamda内部域范围，或者外部局部方法范围都不可改变
 		BasicInterface bi1 = (a,b) -> {System.out.printf(s); 
