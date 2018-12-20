@@ -1,6 +1,7 @@
 import java.io.Serializable;
 
 //可序列化对象需要打上Serializable标签
+//在控制台输入serialver -show打开序列对象检测器
 public class ObjectSeriable implements Serializable{
 
 	
