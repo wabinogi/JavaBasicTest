@@ -19,7 +19,7 @@ public class InputStream {
 	}
 	
 	//字节读入
-	public static void ReadByte() throws IOException
+	 public  static void ReadByte() throws IOException
 	{
 		Reader in = new InputStreamReader(System.in,StandardCharsets.UTF_8);
 		System.out.println((char)in.read());		
