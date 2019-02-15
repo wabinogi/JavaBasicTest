@@ -2,7 +2,6 @@ import static java.lang.System.out;
 
 import java.lang.reflect.Method;
 
-import org.junit.Test;
 
 public class AnnotationMain {
 
@@ -16,9 +15,13 @@ public class AnnotationMain {
 		{
 			out.println(m.getName());
 			AnnotationTest at = m.getAnnotation(AnnotationTest.class);
+			if(at != null)
+			{
 			out.println(at.source());
 			out.println(at.number());
+			}
 		}
+		ia.equals(1);
 		
 	}
 	
@@ -37,6 +40,16 @@ public class AnnotationMain {
 		{
 			out.println("Do nothing !");
 		}
+		
+		//the method override father class Object
+		@Override
+		public boolean equals(Object obj)
+		{
+			return false;
+			
+		}
+		
+		
 		
 		//Must import org.Junit.Test
 		//No annotation parameters , so use default value
