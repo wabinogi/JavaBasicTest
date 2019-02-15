@@ -26,8 +26,8 @@ public class ProxyTest {
 		//代理Proxy调用
 		Object ob = Proxy.newProxyInstance(WabinogiIN.class.getClassLoader(), interfaces, ih);
 		//调用后代理人ob通过接口调用行为方法
-		//((WabinogiIN)ob).GetName();
-		ob.hashCode();
+		((WabinogiIN)ob).GetName();
+		//ob.hashCode();
 		
 		//代理类其他应用见，太复杂了！https://blog.csdn.net/lovejj1994/article/details/78080124
 		Class proxyclass = Proxy.getProxyClass(WabinogiIN.class.getClassLoader(), interfaces);
@@ -39,7 +39,7 @@ public class ProxyTest {
 	
 	public static void main(String... args) throws InstantiationException, IllegalAccessException, ClassNotFoundException
 	{ 
-		Test1();
+		//Test1();
 		Test2();
 	}
 	
@@ -64,7 +64,8 @@ public class ProxyTest {
 			//代理前做点儿啥
 			System.out.println("Proxy invoked !");
 			System.out.println("Proxy Ob is: " + GetPrivateObject());
-			if(method.equals(WabinogiIN.class.getMethod("GetName", null)))
+			Class<?>[] cl = null;
+			if(method.equals(WabinogiIN.class.getMethod("GetName", cl)))
 			{
 				System.out.println("Wabinogi method GetName() invoked  !");
 			}
