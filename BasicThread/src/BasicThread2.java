@@ -1,6 +1,7 @@
 //Runnable接口实现方式
 public class BasicThread2 implements Runnable{
 
+	
 	public static void main(String[] args) throws InterruptedException {
 
 		//初始化
@@ -8,8 +9,6 @@ public class BasicThread2 implements Runnable{
 		Thread tr = new Thread(eThread);
 		tr.start();
 		
-
-	
 		
 		//设置优先级，10位最高，默认为5
 		//如果一开始就设置成10，则创建的tr线程和主线程有同样优先级
@@ -29,6 +28,7 @@ public class BasicThread2 implements Runnable{
 	@Override
 	public void run()
 	{
+
 		Thread ta = Thread.currentThread();
 		//设置线程名
 		ta.setName("Wabinogi");
