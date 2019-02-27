@@ -1,5 +1,5 @@
 
-public class ThreadLocalTest1 implements Runnable{
+public class ThreadLocalTest1  implements Runnable{
 
 	//可以将每个线程的独立副本数据sg，放在ThreadLocal的initialValue中。
 	//在Thread的run方法中，调用threadlocal实例的get方法，即可取得该线程中的副本数据。
@@ -15,11 +15,11 @@ public class ThreadLocalTest1 implements Runnable{
          }
    	  };*/
 	
-	Integer sg = new Integer(0);
-    ThreadLocal<Integer> threadlocal = new ThreadLocal<Integer>()
+	Object1 sg = new Object1();
+    ThreadLocal<Object1> threadlocal = new ThreadLocal<Object1>()
      {
 		 @Override
-         protected Integer initialValue()
+         protected Object1 initialValue()
          {
         	 return sg;
          }
@@ -36,19 +36,25 @@ public class ThreadLocalTest1 implements Runnable{
 			{
 				
 			}
-			threadlocal.set(threadlocal.get() + 1);
+			
+			//threadlocal.set(threadlocal.get() + 1);
 		//threadlocal.set(no);
-	    System.out.println(Thread.currentThread().getName() + " No : " + threadlocal.get() );	
+	    System.out.println(Thread.currentThread().getName() + " Hash : " + threadlocal.get().hashCode() );	
 		}
 	}
 	
 	public static void main(String[] args) {
 
 		ThreadLocalTest1 test1 = new ThreadLocalTest1();
+	
 		for(int i = 1; i <= 4; i++)
 		{
 			Thread t = new Thread(test1);
 			t.setName("Thread " + i);
+			if(t.getName().equals("Thread 4"))
+			{
+				System.out.println("Debug");
+			}
 			t.start();
 		}
 		
