@@ -1,8 +1,6 @@
 
 public class InnerStaticTest implements Runnable {
-	
-	Object1 o1 = new Object1();
-	
+	Integer ii = new Integer(0);
 	public static void main(String[] args) {
 		
 		
@@ -19,75 +17,26 @@ public class InnerStaticTest implements Runnable {
 	public void run()
 	{
 		Thread td = Thread.currentThread();
+		InnerStatic is1 =  new InnerStatic();
+		is1.o = ii;
+	
 		
-		if(td.getName().equals("Thread 1"))
+		while(true)
 		{
-			InnerStatic is1 =  new InnerStatic();
-			is1.o = o1;
-			while(true)
+			if(td.getName().equals("Thread 1"))
 			{
-				long time = System.currentTimeMillis();
-				while( System.currentTimeMillis() - time <=500 )
-				{
-					
-				}		
-
-			((Object1)is1.o).ii = ((Object1)is1.o).ii + 1;
-			System.out.println(td.getName() + " ii : " + ((Object1)is1.o).ii);
-		   } 
-		}
-		if(td.getName().equals("Thread 2"))
-		{
-			InnerStatic is2 =  new InnerStatic();
-			is2.o = o1;
-			while(true)
-			{
-				long time = System.currentTimeMillis();
-				while( System.currentTimeMillis() - time <=500 )
-				{
-					
-				}		
-
-			((Object1)is2.o).ii = ((Object1)is2.o).ii + 1;
-			System.out.println(td.getName() + " ii : " + ((Object1)is2.o).ii);
-		   } 
-		}
-		if(td.getName().equals("Thread 3"))
-		{
-			InnerStatic is3 =  new InnerStatic();
-			is3.o = o1;
-			while(true)
-			{
-				long time = System.currentTimeMillis();
-				while( System.currentTimeMillis() - time <=500 )
-				{
-					
-				}		
-
-			((Object1)is3.o).ii = ((Object1)is3.o).ii + 1;
-			System.out.println(td.getName() + " ii : " + ((Object1)is3.o).ii);
-		   } 
-		} 
-		if(td.getName().equals("Thread 4"))
-		{
-			InnerStatic is4 =  new InnerStatic();
-			is4.o = o1;
-			while(true)
-			{
-				long time = System.currentTimeMillis();
-				while( System.currentTimeMillis() - time <=500 )
-				{
-					
-				}		
-
-			((Object1)is4.o).ii = ((Object1)is4.o).ii + 1;
-			System.out.println(td.getName() + " ii : " + ((Object1)is4.o).ii);
-		} 
-	
+				is1.o = (Integer)is1.o + 1;
+			}
 			
-			
-	
+			long time = System.currentTimeMillis();
+			while( System.currentTimeMillis() - time <=500 )
+			{
+				
+			}		
+
+		System.out.println(td.getName() + " Integer : " + is1.o);
 		}
+		
 	}
 	
 
@@ -103,7 +52,7 @@ public class InnerStaticTest implements Runnable {
 		//两个对象共享i的值，可被两个对象读写（实际是一个对象，两个引用）
 		//但是，如果存在非静态域z,则两个对象的z值实际是不同的！
 		 private int i = 0;
-		Object o;
+		Object o = null;
 		private int z = 0;
 		public void SetZ(int si)
 		{

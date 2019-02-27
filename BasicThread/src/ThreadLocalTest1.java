@@ -15,11 +15,11 @@ public class ThreadLocalTest1  implements Runnable{
          }
    	  };*/
 	
-	Object1 sg = new Object1();
-    ThreadLocal<Object1> threadlocal = new ThreadLocal<Object1>()
+	Integer sg = new Integer(1);
+    ThreadLocal<Integer> threadlocal = new ThreadLocal<Integer>()
      {
 		 @Override
-         protected Object1 initialValue()
+         protected Integer initialValue()
          {
         	 return sg;
          }
@@ -36,10 +36,14 @@ public class ThreadLocalTest1  implements Runnable{
 			{
 				
 			}
+			if(Thread.currentThread().getName().equals("Thread 1"))
+			{
+				threadlocal.set(threadlocal.get() + 1);
+			}
 			
-			//threadlocal.set(threadlocal.get() + 1);
+		//threadlocal.set(threadlocal.get().ii + 1);
 		//threadlocal.set(no);
-	    System.out.println(Thread.currentThread().getName() + " Hash : " + threadlocal.get().hashCode() );	
+	    System.out.println(Thread.currentThread().getName() + " ii : " + threadlocal.get().hashCode());	
 		}
 	}
 	
@@ -51,10 +55,7 @@ public class ThreadLocalTest1  implements Runnable{
 		{
 			Thread t = new Thread(test1);
 			t.setName("Thread " + i);
-			if(t.getName().equals("Thread 4"))
-			{
-				System.out.println("Debug");
-			}
+		
 			t.start();
 		}
 		
