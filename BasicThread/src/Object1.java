@@ -12,7 +12,7 @@
 //读写锁......
 public class Object1 {
 	
-	public  int ii = 0;
+	public  int ii = -2;
 	
 	public void printNo()
 	{
