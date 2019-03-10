@@ -1,11 +1,14 @@
 
 public class InnerStaticTest implements Runnable {
 	Integer ii = new Integer(0);
+	
+	Integer in1 =  new Integer(0);
+	
 	public static void main(String[] args) {
 		
 		
 	    InnerStaticTest it1 = new InnerStaticTest();
-		for(int k = 1; k<5; k++)
+		for(int k = 1; k<3; k++)
 		{
 			Thread td = new Thread(it1);
 			td.setName("Thread " + k);
@@ -17,11 +20,16 @@ public class InnerStaticTest implements Runnable {
 	public void run()
 	{
 		Thread td = Thread.currentThread();
+		//每个线程一个ThreadLocalMap,对应一个Entry
 		InnerStatic is1 =  new InnerStatic();
 		is1.o = ii;
 	
 		
+		
+		
+		
 		while(true)
+		if(td.getName().equals("Thread 2"))
 		{
 			if(td.getName().equals("Thread 1"))
 			{
@@ -35,8 +43,34 @@ public class InnerStaticTest implements Runnable {
 			}		
 
 		System.out.println(td.getName() + " Integer : " + is1.o);
+			try {
+				td.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			in1 = 2;
 		}
 		
+		if(td.getName().equals("Thread 1"))
+		{
+			in1 = 20;
+		}
+		
+		
+		is1.o = in1;
+		
+		while(true)
+		{
+			long time = System.currentTimeMillis();
+			while( System.currentTimeMillis() - time <=500 )
+			{
+				
+			}		
+
+		System.out.println(td.getName() + " o : " + is1.o);
+	   } 
+
 	}
 	
 
@@ -51,7 +85,7 @@ public class InnerStaticTest implements Runnable {
 		//InnerStatic new了两个独立的对象
 		//两个对象共享i的值，可被两个对象读写（实际是一个对象，两个引用）
 		//但是，如果存在非静态域z,则两个对象的z值实际是不同的！
-		 private int i = 0;
+		private int i = 0;
 		Object o = null;
 		private int z = 0;
 		public void SetZ(int si)
