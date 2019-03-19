@@ -15,11 +15,9 @@ public class ThreadLocalTest1  implements Runnable{
          }
    	  };*/
 	
-<<<<<<< HEAD
+
 	Integer sg = new Integer(1);
-=======
-	Integer sg = new Integer(0);
->>>>>>> branch 'master' of https://github.com/wabinogi/JavaBasicTest.git
+
     ThreadLocal<Integer> threadlocal = new ThreadLocal<Integer>()
      {
 		 @Override
@@ -63,11 +61,6 @@ public class ThreadLocalTest1  implements Runnable{
 			
 		//threadlocal.set(threadlocal.get().ii + 1);
 		//threadlocal.set(no);
-<<<<<<< HEAD
-	    System.out.println(Thread.currentThread().getName() + " ii : " + threadlocal.get().hashCode());	
-=======
-	    System.out.println(Thread.currentThread().getName() + " No : " + threadlocal.get());	
->>>>>>> branch 'master' of https://github.com/wabinogi/JavaBasicTest.git
 		}
 	}
 	
@@ -78,11 +71,7 @@ public class ThreadLocalTest1  implements Runnable{
 		for(int i = 1; i <= 2; i++)
 		{
 			Thread t = new Thread(test1);
-			t.setName("Thread " + i);
-<<<<<<< HEAD
-		
-=======
->>>>>>> branch 'master' of https://github.com/wabinogi/JavaBasicTest.git
+
 			t.start();
 		}
 		

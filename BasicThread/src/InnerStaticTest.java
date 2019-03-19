@@ -52,24 +52,6 @@ public class InnerStaticTest implements Runnable {
 			in1 = 2;
 		}
 		
-		if(td.getName().equals("Thread 1"))
-		{
-			in1 = 20;
-		}
-		
-		
-		is1.o = in1;
-		
-		while(true)
-		{
-			long time = System.currentTimeMillis();
-			while( System.currentTimeMillis() - time <=500 )
-			{
-				
-			}		
-
-		System.out.println(td.getName() + " o : " + is1.o);
-	   } 
 
 	}
 	
