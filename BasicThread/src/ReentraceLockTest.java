@@ -13,6 +13,10 @@ import java.util.concurrent.locks.ReentrantLock;
 //重入锁具有条件锁特性
 //进入等待的使用后面的形式：while(j == 3) acond.await();
 //充入锁的结构具有一定的特殊性，只有不能不用的时候才用！
+//该锁有大量用到UNSAFE类中CAS方法的，具备自旋的特性。如：在FOR循环中，进行CAS，直到成功。
+//补充：该锁特殊性是由于，多个线程尝试获取锁资源时，会在AQS的队列中排队，且等待（阻塞）中的线程，
+//使用的是PARK和UNPARK原语方法，这种方法可能会有上下文开销，优化方法是可以先自旋一小段时间，再PARK
+//该锁用的是AQS的非公平锁，因此性能比公平锁要好！公平锁是严格按照AQS队列的顺序，从头结点出队执行的!
 //重入锁可以使用TRYLOCK方法
 public class ReentraceLockTest {
 
