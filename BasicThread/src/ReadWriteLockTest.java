@@ -18,7 +18,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 //读锁是共享锁shared
 //写锁的独占锁exclusive
 //获取一个写锁的操作和ReentranceLock中获取一个普通锁的过程相同
-
+//读锁和写锁都可重入
 public class ReadWriteLockTest {
 
 	static ReentrantReadWriteLock rrwl = new ReentrantReadWriteLock();
@@ -29,22 +29,22 @@ public class ReadWriteLockTest {
 		InnerThread it = rlt.new InnerThread();
 	
 		
-		Thread t1 = new Thread(it);
-		t1.start();
+		//Thread t1 = new Thread(it);
+		//t1.start();
 	
 				
 		//Thread.sleep(200);
 		rrwl.writeLock().lock();
-		WriteSth();
-		ReadSth();
+		//WriteSth();
+		//ReadSth();
 		//关于锁降级，当前线程在使用写锁后，可以立刻用读锁进行加锁，进行读操作
 		//反之不行
-		rrwl.readLock().lock();
+		rrwl.writeLock().lock();
 		System.out.println("Lock degrade !");
 		
-		rrwl.writeLock().unlock();
+		rrwl.writeLock().lock();
 		
-		
+		System.out.println("Lock degrade !");
 	}
 	
 
