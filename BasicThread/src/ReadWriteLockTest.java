@@ -13,6 +13,12 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 //读写锁，是逻辑上的读写操作，与具体IO操作无关！
 //读锁可重入，拥有同一读锁的不同对象可以并发，无论该锁是否解锁
+
+//读写锁本质上是基于AQS队列数据结构实现的
+//读锁是共享锁shared
+//写锁的独占锁exclusive
+//获取一个写锁的操作和ReentranceLock中获取一个普通锁的过程相同
+
 public class ReadWriteLockTest {
 
 	static ReentrantReadWriteLock rrwl = new ReentrantReadWriteLock();
@@ -28,11 +34,15 @@ public class ReadWriteLockTest {
 	
 				
 		//Thread.sleep(200);
-		rrwl.readLock().lock();
-		System.out.println("2:" + rrwl.isWriteLocked());
+		rrwl.writeLock().lock();
 		WriteSth();
 		ReadSth();
-		rrwl.readLock().unlock();
+		//关于锁降级，当前线程在使用写锁后，可以立刻用读锁进行加锁，进行读操作
+		//反之不行
+		rrwl.readLock().lock();
+		System.out.println("Lock degrade !");
+		
+		rrwl.writeLock().unlock();
 		
 		
 	}
@@ -72,10 +82,10 @@ public class ReadWriteLockTest {
     	
     	public void run() {
     		
-    		rrwl.writeLock().lock();
-    		Thread t = Thread.currentThread();
-    		System.out.println(t.getName());
-    		rrwl.writeLock().unlock();
+    	     rrwl.writeLock().lock();
+    		 Thread t = Thread.currentThread();
+    		 System.out.println(t.getName());
+    		 rrwl.writeLock().unlock();
     	}
     }
 
