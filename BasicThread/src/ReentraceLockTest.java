@@ -37,7 +37,7 @@ public class ReentraceLockTest {
 		
 		System.out.println(maint.getName());
 		
-		//ReentraceLockTest.alock.lock();
+		ReentraceLockTest.alock.lock();
 	    //尝试获取锁对象，如果没获取成功，可以先干别的
 		while(ReentraceLockTest.alock.tryLock() == false)
 		{
