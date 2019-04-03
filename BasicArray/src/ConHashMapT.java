@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Spliterator;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ConHashMapT {
@@ -8,8 +10,23 @@ public class ConHashMapT {
 		// TODO Auto-generated method stub
 
 		ConcurrentHashMap chm;
-		System.out.println(16 - (16 >>> 2));
-		System.out.println(tableSizeFor(6));
+	    HashMap<Integer,Integer> hm = new HashMap<Integer,Integer>();
+	    for(int i = 0; i<=30; i++)
+	    {
+	      hm.put(i, i);
+	    }
+	    Spliterator<Integer> s0 = hm.keySet().spliterator().trySplit();
+	    //Spliterator<Integer> s1 = s0.trySplit();
+	    
+	   // System.out.println(st.estimateSize());
+	    //st.tryAdvance((Integer t) -> { System.out.println(t);});
+	    s0.forEachRemaining((t) -> { System.out.println("s0 " + t);} );
+	    //s1.forEachRemaining((t) -> { System.out.println("s1 " +t);} );
+	    //sl1.forEachRemaining( (Integer t) -> { System.out.println(t);} );
+	  //  System.out.println(sl1.toString());
+	    
+	    
+	    
 	}
 
 	 private static final int tableSizeFor(int c) {
