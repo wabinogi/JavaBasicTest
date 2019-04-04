@@ -8,6 +8,7 @@ import static java.lang.System.out;
 //也就是说删除后，索引会改变！因此不适合做添加、删除操作，适合查询、修改
 //顺序读写（迭代器、FOR循环一般）
 //其中的Enumeration接口引用是遗留产物，可以用iterator全替代
+//方法中采用Synchronised关键字。线程安全
 public class VectorTest {
 
 	//线程同步
@@ -21,6 +22,7 @@ public class VectorTest {
 		
 		public static void Add()
 		{ 
+			StringBuffer sb;
 			//索引按插入先后顺序自动赋值
 			Vector vr = new Vector(4,10);
 			vr.add("a");
