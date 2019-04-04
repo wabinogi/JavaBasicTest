@@ -2,6 +2,9 @@ import java.util.HashMap;
 import java.util.Spliterator;
 import java.util.concurrent.ConcurrentHashMap;
 
+//ConcurrentHashMap
+//采用CAS方法，Synchronised关键字对Node级别进行加锁，可以说是数据行锁
+//Spliterator可以同时开启多个线程，通过trySplit将数据分成多个子集，多线程同时处理
 public class ConHashMapT {
 
 	 private static final int MAXIMUM_CAPACITY = 1 << 30;
