@@ -1,3 +1,4 @@
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
 //底层实现采用重入锁，且是2把锁，一把存，一把取，可同时进出队列
@@ -5,9 +6,14 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class LinkedBlockingQueNote {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
 
 		LinkedBlockingQueue lbq;
+		
+		//带阻塞的双端队列
+		//采用一个全局重入锁实现，所有的头尾进出队列操作，均使用了LOCK方法独占
+		//感觉不存在什么多线程从双端同时进队的情况，因为只有释放锁才能操作
+		LinkedBlockingDeque lbd;
 	}
 
 }
