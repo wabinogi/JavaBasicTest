@@ -5,6 +5,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 //ArrayBlockingQueNote 的阻塞底层采用AQS实现，调用的是 UNSAFE.park
 //进出队列采用ReentrantLock lock上锁，因此效率相当于AQS底层的机制
 //所谓的公平和非公平模式，底层是采用公平非公平的ReentrantLock示例
+//存取貌似采用一把锁，既进队列和出队列不能并行操作
 public class ArrayBlockingQueNote {
 
 	public static void main(String[] args) {
