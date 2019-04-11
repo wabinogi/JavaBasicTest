@@ -1,4 +1,6 @@
 
+
+
 public class ThreadLocalTest implements Runnable {
 
 	//为每个线程创造一个自己的Object1对象

@@ -1,4 +1,5 @@
 
+
 public class ThreadLocalTest1  implements Runnable{
 
 	//可以将每个线程的独立副本数据sg，放在ThreadLocal的initialValue中。
