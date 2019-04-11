@@ -4,11 +4,18 @@ import java.util.concurrent.DelayQueue;
 //可采用重编写接口，结合DelayQueue的特性，用于设计具有过期不可用的缓存结构
 //底层采用PriorityQueue
 //采用单一ReentrantLock
-public class DelayQueNote {
+public class DelayQueNote implements Runnable {
 
 	public static void main(String[] args) {
 		DelayQueue dq;
 
+	}
+
+	@Override
+	public void run() {
+		
+		System.out.println("Other Test");
+		
 	}
 
 }
