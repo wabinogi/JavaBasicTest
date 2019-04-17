@@ -13,9 +13,10 @@ public class SingleThreadTest implements Runnable{
 
 	
          ExecutorService executor = Executors.newSingleThreadExecutor();
+         
          ScheduledExecutorService ses;
          SingleThreadTest stt  = new SingleThreadTest();
-         for (int i = 0 ; i <=5 ; i++)
+         for (int i = 0 ; i <=2 ; i++)
          {
         	
         	 executor.execute(stt); 
@@ -28,7 +29,7 @@ public class SingleThreadTest implements Runnable{
 	public void run() {
 		
 		System.out.println(Thread.currentThread().getName());
-		Thread.currentThread().suspend();
+		//Thread.currentThread().suspend();
 	}
 
 }
