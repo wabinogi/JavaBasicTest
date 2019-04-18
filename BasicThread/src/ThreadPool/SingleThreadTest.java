@@ -12,15 +12,16 @@ public class SingleThreadTest implements Runnable{
 	public static void main(String[] args) {
 
 	
-         ExecutorService executor = Executors.newSingleThreadExecutor();
+         ExecutorService executor = Executors.newFixedThreadPool(1);
          
          ScheduledExecutorService ses;
+         ThreadPoolExecutorTest tpet = new ThreadPoolExecutorTest();
          SingleThreadTest stt  = new SingleThreadTest();
-         for (int i = 0 ; i <=2 ; i++)
-         {
-        	
-        	 executor.execute(stt); 
-         }
+     
+         executor.execute(stt); 
+         executor.execute(stt); 
+         
+ 
          
          executor.shutdown();
 	}
@@ -29,7 +30,13 @@ public class SingleThreadTest implements Runnable{
 	public void run() {
 		
 		System.out.println(Thread.currentThread().getName());
-		//Thread.currentThread().suspend();
+		try {
+			Thread.currentThread().sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+	
 	}
 
 }
