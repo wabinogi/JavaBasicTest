@@ -1,6 +1,18 @@
 package ThreadPool;
 
 //ThreadPoolExecutor类解析要点
+//线程池执行
+//FixedThreadPool 采用LinkedBlockingQueue
+//CachedThreadPool 采用SynchronousQue
+//CachedThreadPool采用SynchronousQue的原因：
+//生产者（每次调用Execute方法时）是一个，而消费者是无限多的新线程，因此理论上消费的速度远远大于生产的速度
+//SynchronousQue没有队列缓存空间，若消费的慢了，生产端会先自旋，再Park阻塞。
+//基于资源消耗低，高性能的设计，SynchronousQue没有队列的维护管理开销。
+
+//SingleThreadPool  采用LinkedBlockingQueue
+
+//不同的池只是创建Worker（消费者）的数量不同，与各种BlockingQueue的大小貌似没关系
+
 //ThreadPoolExecutor中的状态位，和控制位采用大量的位运算操作进行状态更新
 //当线程池里的线程数量小于corePoolSize时，通过addWorker方法创建 线程池里的待执行任务的线程
 //addWorker中会创建一个Worker对象，该对象使用Executors类构造一个新的Thread对象且含有待执行任务的对象。
