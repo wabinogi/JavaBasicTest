@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/ForkJoinTest.java=UTF-8
 encoding//src/ReadWriteLockTest.java=UTF-8
 encoding//src/ReentraceLockTest.java=UTF-8
 encoding//src/ThreadLocalTest.java=UTF-8
