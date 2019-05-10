@@ -6,5 +6,6 @@ encoding//src/ThreadLocalTest.java=UTF-8
 encoding//src/ThreadLocalTest1.java=UTF-8
 encoding//src/ThreadPool/CachedThreadTest.java=GBK
 encoding//src/ThreadPool/CallableTest.java=UTF-8
-encoding//src/ThreadPool/SingleThreadTest.java=GBK
+encoding//src/ThreadPool/ForkJoinPoolTest.java=GBK
+encoding//src/ThreadPool/ThreadPoolExecutorTest.java=GB2312
 encoding//src/ThreadPool/ThreadPoolTest.java=UTF-8
