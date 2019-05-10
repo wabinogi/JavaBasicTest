@@ -9,25 +9,39 @@ import java.util.concurrent.ScheduledExecutorService;
 //底层采用1个大小的LinkedBlockingQueue
 public class SingleThreadTest implements Runnable{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 	
          ExecutorService executor = Executors.newSingleThreadExecutor();
          ScheduledExecutorService ses;
-         SingleThreadTest stt  = new SingleThreadTest();
-         for (int i = 0 ; i <=5 ; i++)
+   
+         for (int i = 1 ; i <= 5000 ; i++)
          {
-        	
-        	 executor.execute(stt); 
+        	 doWork();
+        	 if(i % 100 == 0)
+        	 {
+        		 System.out.println(i + " done");
+        		 executor.execute(new SingleThreadTest()); 
+        	 }
          }
          
          executor.shutdown();
+	}
+	public static void doWork() throws Exception
+	{
+		Thread.currentThread().sleep(1);
 	}
 
 	@Override
 	public void run() {
 		
-		System.out.println(Thread.currentThread().getName());
+		try {
+			Thread.currentThread().sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Thread work done !");
 		
 	}
 
