@@ -4,7 +4,7 @@ public class Singleton {
    public static void main(String...agrs)
    {
 	 
-	   
+	   System.out.println("123");
    }
 	
    private static Singleton sg;
