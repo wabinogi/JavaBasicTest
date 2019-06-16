@@ -23,7 +23,7 @@ public class ArrayBlockingQueTest implements Runnable {
 		 t.start();
 
 		 //一个消费者
-		 System.out.println("Consumer: ");
+		 System.out.println("Consumer1: ");
 		 ot1.consumer();
 		
 		
