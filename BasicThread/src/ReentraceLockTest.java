@@ -25,7 +25,7 @@ public class ReentraceLockTest {
     public static Lock Reentrantlock = new ReentrantLock();
     //使用Reentrantlock实例，初始化condition对象
     public static Condition condition = Reentrantlock.newCondition();
-
+ 
 	public static void  main(String[] args) throws InterruptedException 
 	{
 		ReentraceLockTest threadA = new ReentraceLockTest();
