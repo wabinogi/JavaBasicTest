@@ -5,9 +5,9 @@ public class SecondThread implements Runnable
 	@Override
 	public void run()
 	{
-		while(true){
-		if(ReentraceLockTest.Reentrantlock.tryLock())
-		{
+		
+		ReentraceLockTest.Reentrantlock.lock();
+	
 			try
 			{
 				for(int i =0; i< 10; i++)
@@ -19,16 +19,7 @@ public class SecondThread implements Runnable
 			{
 				ReentraceLockTest.condition.signal();
 				ReentraceLockTest.Reentrantlock.unlock();
-				break;
-			}
-		
-		}
-		else
-		{
-			System.out.println("SecondThread : waiting !" );
-		}
-		
-		}
+		    }
 		
 	}
 	

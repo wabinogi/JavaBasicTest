@@ -20,8 +20,9 @@ import java.util.concurrent.locks.ReentrantLock;
 //重入锁可以使用TRYLOCK方法
 public class ReentraceLockTest {
 
-	//因为要让多个ReentraceLockTest对象使用一个ReentrantLock，因此使用静态变量
-	//多个不同的对象，使用一个Reentrantlock实例，即可实现多个对象所在线程的同步
+	//多个不同的对象，可以使用一个Reentrantlock实例，即可实现多个对象所在线程的同步
+	//本质是，多个对象所在的线程，在竞态条件下尝试获取Reentrantlock，一旦获取成功，就可以执行临界区内的代码
+	//临界区内的代码本质上是需要被同步的资源，临界区执行完后，需要释放锁，让后续线程继续竞争
     public static Lock Reentrantlock = new ReentrantLock();
     //使用Reentrantlock实例，初始化condition对象
     public static Condition condition = Reentrantlock.newCondition();
@@ -45,6 +46,9 @@ public class ReentraceLockTest {
 	//Reentrantlock的典型用法if()... try... finally...
 	public void method() throws InterruptedException
 	{
+	   //Reentrantlock中tryLock和lock的区别
+	   //tryLock只会尝试获取一次，如果失败就false了
+	   //lock会一致尝试获取，知道成功，在AQS中lock会调用park方法，进入等待队列，而tryLock不会
 	   if(Reentrantlock.tryLock())
 	   {
 		   try
@@ -52,6 +56,8 @@ public class ReentraceLockTest {
 			   for(int i = 0;i< 10;i++)
 			   {
 				   //await在调用前，必须确保该线程已经取得Reentrantlock，否则额会报错
+				   //因为该方法所在线程在执行await时，必须先释放锁，再将自己挂起（park）
+				   //一旦释放锁，后续线程开始竞态
 				   if(i==6) condition.await();
 				   System.out.println("AThread : " + i );
 			   }
@@ -84,6 +90,7 @@ public class ReentraceLockTest {
 				   finally
 				   {
 					   //signal在通知其他线程从await中唤醒前，必须确保在本线程的重入锁中！
+					   //本质是，一旦signal执行，本线程应该马上释放锁，让其他线程（await的？）立刻开始竞态
 					   condition.signal();
 					   Reentrantlock.unlock();
 					   break;
