@@ -19,6 +19,7 @@ public class SecondThread implements Runnable
 			{
 				ReentraceLockTest.condition.signal();
 				ReentraceLockTest.Reentrantlock.unlock();
+				
 		    }
 		
 	}

@@ -30,12 +30,17 @@ public class ReentraceLockTest {
 	public static void  main(String[] args) throws InterruptedException 
 	{
 		ReentraceLockTest threadA = new ReentraceLockTest();
+		ThreadB threadB =  threadA.new ThreadB();
 		SecondThread threadS = new SecondThread();
 		Thread t = new Thread(threadS);
+		Thread t1 = new Thread(threadB);
 		
-		//线程B方法启动
+		//线程S方法启动
 		//该方法必须先执行，因为如果先执行method方法，其中的await方法会使主线程阻塞，从而无法启动threadB
 	    t.start();
+	    
+	    //线程B方法启动
+	    t1.start();
 		
 		//线程A方法启动
 		threadA.method();
@@ -49,6 +54,8 @@ public class ReentraceLockTest {
 	   //Reentrantlock中tryLock和lock的区别
 	   //tryLock只会尝试获取一次，如果失败就false了
 	   //lock会一致尝试获取，知道成功，在AQS中lock会调用park方法，进入等待队列，而tryLock不会
+	   while(true)
+	   {
 	   if(Reentrantlock.tryLock())
 	   {
 		   try
@@ -65,8 +72,10 @@ public class ReentraceLockTest {
 		   finally
 		   {
 		      Reentrantlock.unlock();
+		      break;
 		   }
-	   }		
+	   }	
+	   }
 	}
 	
 	
@@ -90,24 +99,14 @@ public class ReentraceLockTest {
 				   finally
 				   {
 					   //signal在通知其他线程从await中唤醒前，必须确保在本线程的重入锁中！
-					   //本质是，一旦signal执行，本线程应该马上释放锁，让其他线程（await的？）立刻开始竞态
+					   //本质是，一旦signal执行，AQS中waitstatus设置为0，执行完unlock后，才释放锁，后续队列的线程(包括await的)开始重新公平竞态
+					   //因为signal方法改的是一个标志位，因此可以调用多次
 					   condition.signal();
 					   Reentrantlock.unlock();
 					   break;
 				   }
 			   }
-			   else
-			   {
-				   try 
-				   {
-					  Thread.currentThread().sleep(200);
-				   } 
-				   catch (InterruptedException e) 
-				   {
-					e.printStackTrace();
-				   }
-				   System.out.println("BThread :  waiting !"  );
-			   }
+		
 			}
 		}
     }
