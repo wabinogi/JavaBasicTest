@@ -49,7 +49,9 @@ public class ThreadPoolExecutorTest implements Runnable {
 		//TERMINATED
 		System.out.println("TERMINATED:" + (3 << (Integer.SIZE - 3)));
 		//CAPACITY
-		System.out.println(((1 << (Integer.SIZE - 3)) - 1));
+		System.out.println(Integer.toBinaryString(COUNT_BITS));
+		System.out.println(Integer.toBinaryString(1<<COUNT_BITS));
+		System.out.println(Integer.toBinaryString(-1 << COUNT_BITS));
 		//ctl
 		System.out.println(ctlOf(-1 << COUNT_BITS, 0));
 		ThreadPoolExecutor te;
