@@ -7,11 +7,11 @@ import java.util.concurrent.Executors;
 //线程池中的线程超过60秒未使用， 则会被移除
 //使用过的线程会被重新利用
 //每个创建的线程对象是一个SynchronousQueue对象
-public class CachedThreadTest {
+public class CachedThreadTest implements Runnable{
 
 	public static void main(String[] args) {
 		
-		SingleThreadTest stt  = new SingleThreadTest();
+		CachedThreadTest stt  = new CachedThreadTest();
 		ExecutorService executor = Executors.newCachedThreadPool();
 		
 		//循环21次
@@ -22,6 +22,12 @@ public class CachedThreadTest {
 			executor.execute(stt);
 		}
 //	executor.shutdown();
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
