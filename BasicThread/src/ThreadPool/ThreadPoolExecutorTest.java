@@ -21,6 +21,9 @@ package ThreadPool;
 //runWorker(this)中提供重载方法，beforeExecute和afterExecute用于调用主方法前后的处理操作。
 //当线程开始执行对象中的Runnable方法前，使用Work中的Lock进行锁定，使得该线程串行执行？？
 //该线程执行完第一个对象的Runnable方法后，使用getTask方法，循环从BlockingQue中取新的对象
+
+//fixedPool使用LinkedBlockingQue的原因：当LBQ中的任务被执行的多个线程消费完时，线程会调用await进入阻塞
+//addWorker被调用几次，就会创建几个执行线程，线程数量受到多种参数限制
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
