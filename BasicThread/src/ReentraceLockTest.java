@@ -37,7 +37,7 @@ public class ReentraceLockTest {
 		
 		//线程S方法启动
 		//该方法必须先执行，因为如果先执行method方法，其中的await方法会使主线程阻塞，从而无法启动threadB
-	    t.start();
+	    //t.start();
 	    
 	    //线程B方法启动
 	    t1.start();
@@ -65,7 +65,9 @@ public class ReentraceLockTest {
 				   //await在调用前，必须确保该线程已经取得Reentrantlock，否则额会报错
 				   //因为该方法所在线程在执行await时，必须先释放锁，再将自己挂起（park）
 				   //一旦释放锁，后续线程开始竞态
-				   if(i==6) condition.await();
+				   //等待2S，如果超过2S，则重新获取锁，继续执行
+				   //返回值为正，说明还剩余这么多纳秒没有被等待就提前执行结束了
+				   if(i==6) System.out.println(condition.awaitNanos(2000000000));
 				   System.out.println("AThread : " + i );
 			   }
 		   }
