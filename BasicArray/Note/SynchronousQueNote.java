@@ -1,5 +1,6 @@
 import java.util.concurrent.SynchronousQueue;
-//该队列不存储任务元素，每一个PUT必须等待一个TAKE操作
+//该队列不存储任何元素，每一个PUT必须等待一个TAKE操作
+//说SQ没有存储空间，实际上可以理解为空间为1的FIFO或者FILO结构
 //适合一个线程传递信息给另一个线程
 //线程池底层使用该结构
 //公平模式采用QUEUE，FIFO

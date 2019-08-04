@@ -20,86 +20,97 @@ import java.util.concurrent.locks.ReentrantLock;
 //重入锁可以使用TRYLOCK方法
 public class ReentraceLockTest {
 
-     static Lock alock = new ReentrantLock();
-     static Condition acond = alock.newCondition();
-     static Thread t;
-	 static int j;
-	public static void  main(String[] args) throws InterruptedException, FileNotFoundException {
-		// TODO Auto-generated method stub
-		
-		ReentraceLockTest rlt = new ReentraceLockTest();
-		Thread maint = Thread.currentThread();
-		maint.setName("Main THREAD");
-		SecondThread st = rlt.new SecondThread();
-	    t = new Thread(st);
-		t.setName("SECOND THREAD");
-		t.start();
-		
-		System.out.println(maint.getName());
-		
-		ReentraceLockTest.alock.lock();
-	    //尝试获取锁对象，如果没获取成功，可以先干别的
-		while(ReentraceLockTest.alock.tryLock() == false)
-		{
-			 System.out.println("Main Waiting ");
-			 Thread.sleep(100);
-		}
-		
-		rlt.method();
-	  
-	}
-	
-	public void method()
+	//多个不同的对象，可以使用一个Reentrantlock实例，即可实现多个对象所在线程的同步
+	//本质是，多个对象所在的线程，在竞态条件下尝试获取Reentrantlock，一旦获取成功，就可以执行临界区内的代码
+	//临界区内的代码本质上是需要被同步的资源，临界区执行完后，需要释放锁，让后续线程继续竞争
+    public static Lock Reentrantlock = new ReentrantLock();
+    //使用Reentrantlock实例，初始化condition对象
+    public static Condition condition = Reentrantlock.newCondition();
+ 
+	public static void  main(String[] args) throws InterruptedException 
 	{
-		if(ReentraceLockTest.alock.tryLock())
-		{
-			try
-			{
-			  for( j = 0; j <= 9; j ++){
-				
-				  System.out.println("Main : " + j);
-			   }
-			}
-			finally
-			{
-				//主线程执行完毕后，使用signalAll，使得所有线程重新进入竞争
-				//acond.signalAll();
-				ReentraceLockTest.alock.unlock();
-			}
-		}
+		ReentraceLockTest threadA = new ReentraceLockTest();
+		ThreadB threadB =  threadA.new ThreadB();
+		SecondThread threadS = new SecondThread();
+		Thread t = new Thread(threadS);
+		Thread t1 = new Thread(threadB);
+		
+		//线程S方法启动
+		//该方法必须先执行，因为如果先执行method方法，其中的await方法会使主线程阻塞，从而无法启动threadB
+	    //t.start();
+	    
+	    //线程B方法启动
+	    t1.start();
+		
+		//线程A方法启动
+		threadA.method();
+		
+		
 	}
 	
-	
-	public class SecondThread implements Runnable
-	{   
-		public void run() 
-		{
-		   Thread tt = Thread.currentThread();
-		   System.out.println(tt.getName());
-		   if(ReentraceLockTest.alock.tryLock())
-			{
-		   try{
-		   for( j = 0; j <= 9; j ++){
-			   
-			   //满足某个条件的时候该线程进入等待！
-			   //while(j == 3) acond.await();
-			   System.out.println("S : " + j);
-			
-			} 
+	//Reentrantlock的典型用法if()... try... finally...
+	public void method() throws InterruptedException
+	{
+	   //Reentrantlock中tryLock和lock的区别
+	   //tryLock只会尝试获取一次，如果失败就false了
+	   //lock会一致尝试获取，知道成功，在AQS中lock会调用park方法，进入等待队列，而tryLock不会
+	   while(true)
+	   {
+	   if(Reentrantlock.tryLock())
+	   {
+		   try
+		   {
+			   for(int i = 0;i< 10;i++)
+			   {
+				   //await在调用前，必须确保该线程已经取得Reentrantlock，否则额会报错
+				   //因为该方法所在线程在执行await时，必须先释放锁，再将自己挂起（park）
+				   //一旦释放锁，后续线程开始竞态
+				   //等待2S，如果超过2S，则重新获取锁，继续执行
+				   //返回值为正，说明还剩余这么多纳秒没有被等待就提前执行结束了
+				   if(i==6) System.out.println(condition.awaitNanos(2000000000));
+				   System.out.println("AThread : " + i );
+			   }
 		   }
 		   finally
 		   {
-			   ReentraceLockTest.alock.unlock();
-			  
+		      Reentrantlock.unlock();
+		      break;
 		   }
-		   
-			}
-		   else
-		   {
-			   System.out.println("SEC Waiting ");
-		   }
-		   
-		}	
+	   }	
+	   }
 	}
+	
+	
+    class ThreadB implements Runnable
+    {
+
+		@Override
+		public void run() 
+		{
+		   while(true)
+		   {
+			   if(Reentrantlock.tryLock())
+			   {
+				   try
+				   {
+					   for(int i = 0;i< 10;i++)
+					   {
+						   System.out.println("BThread : " + i );
+					   }
+				   }
+				   finally
+				   {
+					   //signal在通知其他线程从await中唤醒前，必须确保在本线程的重入锁中！
+					   //本质是，一旦signal执行，AQS中waitstatus设置为0，执行完unlock后，才释放锁，后续队列的线程(包括await的)开始重新公平竞态
+					   //因为signal方法改的是一个标志位，因此可以调用多次
+					   condition.signal();
+					   Reentrantlock.unlock();
+					   break;
+				   }
+			   }
+		
+			}
+		}
+    }
 
 }

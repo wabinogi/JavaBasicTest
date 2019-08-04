@@ -1,5 +1,10 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+=======
+encoding//Note/LinkedBlockingQueNote.java=GBK
+>>>>>>> branch 'master' of https://github.com/wabinogi/JavaBasicTest
 encoding//Note/SynchronousQueNote.java=GBK
 encoding//src/HashMapTest.java=UTF-8
 encoding//src/PriorityQueTest.java=UTF-8
 encoding//src/VectorTest.java=UTF-8
+encoding/<project>=UTF-8
