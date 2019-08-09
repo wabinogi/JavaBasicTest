@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 //ScheduledThreadPoolTest中有一个DelayedWorkQueue，DelayedWorkQueue中采用小根堆算法保证头结点最小
 //维护小根堆算法在DelayedWorkQueue类中。
 //通过GetDelay方法判断是否达到执行时间
-//当有线程占有leader时，其他线程全部await
+//当有线程占有leader时，其他线程全部await 
 
 
 //fixedRate = 5000 是指，一个任务启动后，过了5S再启动另一个任务，过了5秒再启动下一个，以固定的速率启动
