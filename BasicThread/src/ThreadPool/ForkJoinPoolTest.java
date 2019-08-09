@@ -6,13 +6,16 @@ package ThreadPool;
 //ForkJoinPool中线程直接采用 “工作窃取”算法工作
 //采用FORK-JOIN机制，把一个任务拆成多个小任务，在多个CPU上执行，然后再合并，由此可想任务是可拆分的大任务
 
+//ForkJoinTask重量级比Thread轻，ForkJoinTask的任务分解需要基于DAG，有向无环图，不要使用异步死锁方法去fork join
+
+import java.util.concurrent.ForkJoinPool;
 
 public class ForkJoinPoolTest {
 
 	public static void main(String[] args) {
 		
 		//ForkJoinWorkerThread
-		
+		ForkJoinPool fjwp;
 
 	}
 
