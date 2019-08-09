@@ -3,27 +3,27 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-//implements Callable<String>，返回�?�为STRING
+//implements Callable<String>，返回�?�为STRING
 
 public class CallableTest implements Callable<String>{
 
 	public static void main(String...args) throws InterruptedException, ExecutionException
 	{
 		CallableTest ct = new CallableTest();
-		//Future�?
+		//Future�?
 		//中断任务
-		//查询任务状�??
+		//查询任务状�??
 		//获取任务结果
-		//通过FutureTask包装器取得返回�?�，FutureTask实现了Future、Runnable接口
+		//通过FutureTask包装器取得返回�?�，FutureTask实现了Future、Runnable接口
 		FutureTask<String> ft = new FutureTask<String>(ct);
-		//FutureTask加入到THREAD线程�?
+		//FutureTask加入到THREAD线程�?
 		Thread t  = new Thread(ft);
 		t.start();
 		
 		
 
 		//通过get()取得返回参数
-		//如果计算没结束，则被阻塞，直到完�?
+		//如果计算没结束，则被阻塞，直到完�?
 		//如果计算没结束，T2线程被终端，会返回InterruptedException
 		//isDone为TRUE表示计算完成
 		while(!ft.isDone())
@@ -32,7 +32,7 @@ public class CallableTest implements Callable<String>{
 			 System.out.println("Computing");
 		}
 		
-		 System.out.println(ft.get());
+		 System.out.println("else : " + ft.get());
 	}
 
 	public static String method1() throws InterruptedException
