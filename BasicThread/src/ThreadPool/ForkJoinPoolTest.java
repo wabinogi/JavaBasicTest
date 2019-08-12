@@ -5,6 +5,11 @@ package ThreadPool;
 //ForkJoinPool中每个线程都维护一个自己双端队列DEQUE实例,每个实例最多MAXIMUM_QUEUE_CAPACITY 64M
 //ForkJoinPool中线程直接采用 “工作窃取”算法工作
 //采用FORK-JOIN机制，把一个任务拆成多个小任务，在多个CPU上执行，然后再合并，由此可想任务是可拆分的大任务
+//maximum number of running threads to 32767.
+//每个子任务都维护一个双端队列，其他线程在任务完成时使用工作窃取从双端队列尾部取得任务，
+//RecusiveAction 没有返回值的任务
+//RecusiveTask 有返回值的任务
+//The @Contended annotation alerts JVMs to try to keep instances apart.
 
 //ForkJoinPool的一些参数
 //SMASK       ffff
