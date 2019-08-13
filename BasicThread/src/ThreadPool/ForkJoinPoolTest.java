@@ -11,14 +11,11 @@ package ThreadPool;
 //RecusiveTask 有返回值的任务
 //The @Contended annotation alerts JVMs to try to keep instances apart.
 
-//ForkJoinPool的一些参数
-//SMASK       ffff
-//MAX_CAP 0111|fff
-//EVENMASK fff|1110
-//SQMASK  00|0111|1110
-//INACTIVE SHARED_QUEUE 1000|000|0000
-//SS_SEQ      1|0000|0000
-//MODE_MASK  ffff|0000
+//一个ForkJoinPool中有多个WorkQueue，偶数WorkQueue保存的是submission，奇数submission保存的是task
+//每个WorkQueue有一个工作线程，也可能没有？
+//该线程池parallelism为JVM可用的CPU核心数
+//WorkQueue中的并发操作所使用CAS，但是会有ABA的问题，因此配合版本戳使用
+
 
 //虚类ForkJoinTask
 //貌似是只为ForkJoinPool使用的虚类
@@ -31,6 +28,7 @@ package ThreadPool;
 //封装了一个杂七杂八的方法，包括重写方法onStart和OnTerminal，包括不会被显示调用的run方法，以及获取线程状态的方法
 
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveAction;
 
 public class ForkJoinPoolTest {
 
@@ -41,7 +39,7 @@ public class ForkJoinPoolTest {
 		System.out.println(INITIAL_QUEUE_CAPACITY >>> 1);
 		//ForkJoinWorkerThread
 		ForkJoinPool fjwp;
-	
+	    RecursiveAction ra;
 
 	}
 
