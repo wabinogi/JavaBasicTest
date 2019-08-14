@@ -5,6 +5,7 @@ import java.util.concurrent.RecursiveTask;
 
 //需要返回结果值得分解任务要继承自RecursiveTask，RecursiveTask为泛型，可定义为RecursiveTask<Object>
 //pool.invoke(st)执行完毕后，可以使用st.join取得返回结果
+//可以使用st.isCompleteAbnomally和st.getException方法获得任务是否异常
 //mid为边界值，可能会被重复处理
 
 public class RecusiveTaskTest {

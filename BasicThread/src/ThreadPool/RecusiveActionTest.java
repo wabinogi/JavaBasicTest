@@ -6,6 +6,7 @@ import java.util.concurrent.RecursiveAction;
 import java.util.concurrent.RecursiveTask;
 
 //RecursiveAction
+//继承自ForkJoinTask，实现了Future接口
 //无结果返回任务，配合FJPool使用
 //由于没有返回值，我猜测应该没有JOIN的过程，实际上RecursiveAction派生子类的JOIN过程会被调用，只不过返回为NULL
 //对于RecursiveAction的派生子类，返回值为NULL，因此可以不调用JOIN方法
@@ -32,9 +33,9 @@ public class RecusiveActionTest  {
 		
 		ForkJoinPool apool = ForkJoinPool.commonPool();
 		
-		//apool.submit(rt);
+		apool.submit(st);
 	
-		apool.invoke(st);
+		apool.submit(rt);
 		System.out.println(apool.toString());
 		System.out.println(Arrays.toString(array));
 		
