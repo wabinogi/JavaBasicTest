@@ -4,17 +4,24 @@ package ThreadPool;
 //ForkJoinPool采用有限的线程，默认线程池数和CPU数一样
 //ForkJoinPool中每个线程都维护一个自己双端队列DEQUE实例,每个实例最多MAXIMUM_QUEUE_CAPACITY 64M
 //ForkJoinPool中线程直接采用 “工作窃取”算法工作
+//随着IDLE_TIMEOUT增加，池中的Worker会减少
+//Pool中的线程上限时32767，maximum number of running threads to 32767.
+
 //采用FORK-JOIN机制，把一个任务拆成多个小任务，在多个CPU上执行，然后再合并，由此可想任务是可拆分的大任务
-//maximum number of running threads to 32767.
 //每个子任务都维护一个双端队列，其他线程在任务完成时使用工作窃取从双端队列尾部取得任务，
 //RecusiveAction 没有返回值的任务
 //RecusiveTask 有返回值的任务
 //The @Contended annotation alerts JVMs to try to keep instances apart.
 
-//一个ForkJoinPool中有多个WorkQueue，偶数WorkQueue保存的是submission，奇数submission保存的是task
-//每个WorkQueue有一个工作线程，也可能没有？
+//一个ForkJoinPool中有多个WorkQueue，最大WorkQueue数组上限貌似是64，偶数WorkQueue保存的是submission，奇数submission保存的是task
+//WorkQueue可以看成一个以2位幂的HASH表，Thread的数量是CPU核数（默认值），采用ThreadLocalrandom配对消费
+//WorkQueue数组中的WorkQueue某些队列对象可能为空
 //该线程池parallelism为JVM可用的CPU核心数
 //WorkQueue中的并发操作所使用CAS，但是会有ABA的问题，因此配合版本戳使用
+//线程池利用ThreadLocalrandom类把线程池的线程和WORK QUEUE HASH配对
+//WorkQueue的窃取操作采用poll方法，POP、PUSH和POLL采用CAS模式对内存进行修改
+//如果工作线程窃取worker窃取失败，则会停用并排队，之后随机选择一个新的WorkQueue继续
+//
 
 
 //虚类ForkJoinTask

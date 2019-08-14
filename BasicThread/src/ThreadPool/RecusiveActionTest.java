@@ -32,7 +32,7 @@ public class RecusiveActionTest  {
 		
 		ForkJoinPool apool = ForkJoinPool.commonPool();
 		
-		apool.submit(rt);
+		//apool.submit(rt);
 	
 		apool.invoke(st);
 		System.out.println(apool.toString());
