@@ -4,6 +4,12 @@ package basic;
   
 public class BreakLabelTest {
    
+	static void BasicTest()
+	{
+		System.out.println("OK");
+	}
+
+	
 	@SuppressWarnings("unused")
 	public static void main(String[] args)
 	{
